@@ -8,13 +8,25 @@ export default class TodoListItem extends Component {
     super();
 
     this.onLabelClick = () => {
-      console.log(`Done: ${this.props.label}`);
+      this.setState({
+        done: true
+      });
+    };
+
+    this.state = {
+      done: false
     };
   }
 
   render() {
 
     const { label, important = false } = this.props;
+    const { done } = this.state;
+
+    let classNames = 'todo-list-item row';
+    if ( done ) {
+      classNames += ' done';
+    };
 
     const style = {
       color: important ? 'steelblue' : 'black',
@@ -22,7 +34,7 @@ export default class TodoListItem extends Component {
     };
   
     return (
-      <span className="todo-list-item row">
+      <span className= { classNames }>
         <span
           className="todo-list-item-label col-9"
           style={style}
